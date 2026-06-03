@@ -1,0 +1,13 @@
+venv/
+__pycache__/
+*.pyc
+.env
+config/secrets.py
+
+.cache/
+*.log
+desktop.ini
+*.o
+*.lnk
+*.exe
+model/
