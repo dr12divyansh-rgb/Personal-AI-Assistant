@@ -1,7 +1,7 @@
 @echo off
 
-cd /d "C:\Users\pc\OneDrive\Desktop\All Files\DVJ\Voice_assistant_project"
+cd /d "C:\Users\pc\Desktop\All Files\DVJ\Voice_assistant_project"
 
-call venv\Scripts\activate
+"C:\Users\pc\Desktop\All Files\DVJ\Voice_assistant_project\.venv\Scripts\python.exe" main.py
 
-python main.py
+pause
