@@ -83,6 +83,18 @@ while True:
 
         continue
 
+    # Ignore wake-word-only queries
+    wake_phrases = [
+        "jarvis",
+        "hey jarvis",
+        "hi jarvis",
+        "okay jarvis",
+        "ok jarvis"
+    ]
+    if query in wake_phrases:
+        speak("Yes, How can I assist you?")
+        continue
+
 
     # Process command
     router.process(query)
