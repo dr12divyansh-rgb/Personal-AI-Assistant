@@ -1,10 +1,4 @@
-<<<<<<< HEAD
-#  Diya - Personal AI Assistant
-=======
 # 🤖 Diya — Personal AI Assistant
->>>>>>> a62c7ac45fe3f0c3d214551b190c220dc129cd4f
-
-
 
 <p align="center">
   A local, voice-controlled personal AI assistant inspired by JARVIS.
@@ -18,18 +12,14 @@
   <img src="https://img.shields.io/badge/Status-Active%20Development-orange">
 </p>
 
----
-
 # ✨ Features
 
-<<<<<<< HEAD
 * "Diya"
 * "Play Closer"
 * "Lock my laptop"
 * "What is Artificial Intelligence?"
 * "Sleep"
 * "Wake up"
-=======
 * 🎤 Voice Recognition
 * 🔊 Text-to-Speech
 * 🧠 Local AI using Ollama
@@ -43,23 +33,13 @@
 * 🧩 Modular Skill Architecture
 * 💾 Local Memory
 * 🚀 Performance Optimization
->>>>>>> a62c7ac45fe3f0c3d214551b190c220dc129cd4f
-
----
 
 # 🧠 How Diya Works
 
-
-
 Diya uses a modular router to decide whether a command should be handled directly by a skill or sent to the local AI.
 
----
 
-# ⚡ Direct Commands vs AI Commands
-
-## Direct Command
-
-For:
+# Direct Command
 
 ```text
 "Diya -> wake up word"
