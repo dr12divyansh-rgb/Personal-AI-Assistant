@@ -5,6 +5,7 @@ __pycache__/
 config/secrets.py
 
 .cache/
+memory/conversations.json
 *.log
 desktop.ini
 *.o
