@@ -3,7 +3,7 @@ from speech.speech import speak, take_command
 from core.router import AssistantRouter
 from core.context import AssistantContext
 
-assistant_awake = True
+assistant_awake = False
 context = AssistantContext()
 router = AssistantRouter(context)
 
@@ -19,12 +19,6 @@ DIRECT_COMMANDS = [
     "previous",
     "volume"
 ]
-
-
-assistant_awake = False
-
-speak("Jarvis is now online")
-
 
 while True:
 
