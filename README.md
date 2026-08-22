@@ -14,12 +14,6 @@
 
 # ✨ Features
 
-* "Diya"
-* "Play Closer"
-* "Lock my laptop"
-* "What is Artificial Intelligence?"
-* "Sleep"
-* "Wake up"
 * 🎤 Voice Recognition
 * 🔊 Text-to-Speech
 * 🧠 Local AI using Ollama
@@ -42,7 +36,9 @@ Diya uses a modular router to decide whether a command should be handled directl
 # Direct Command
 
 ```text
-"Diya -> wake up word"
-"Open Chrome"
-"Play <songname>"
-"Diya, what is polymorphism?"
+* "Diya"
+* "Play Closer"
+* "Lock my laptop"
+* "What is Artificial Intelligence?"
+* "Sleep"
+* "Wake up"
