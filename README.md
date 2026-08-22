@@ -1,78 +1,68 @@
+<<<<<<< HEAD
 #  Diya - Personal AI Assistant
+=======
+# 🤖 Diya — Personal AI Assistant
+>>>>>>> a62c7ac45fe3f0c3d214551b190c220dc129cd4f
 
-A Jarvis-inspired AI voice assistant built using Python, Ollama, and Spotify integration.
 
-# Features
 
-*  Voice Recognition
-*  Text-to-Speech Responses
-*  Local AI using Ollama
-*  Spotify Song Playback via Voice Commands
-*  Wake/Sleep Mode
-*  Laptop Lock Command
-*  Context Memory Support
-*  Modular Skill-Based Architecture
-*  Auto Startup with Windows
+<p align="center">
+  A local, voice-controlled personal AI assistant inspired by JARVIS.
+</p>
 
-# Tech Stack
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.x-blue?logo=python">
+  <img src="https://img.shields.io/badge/AI-Ollama-black">
+  <img src="https://img.shields.io/badge/Model-Qwen2.5%201.5B-purple">
+  <img src="https://img.shields.io/badge/Spotify-Integration-1DB954?logo=spotify">
+  <img src="https://img.shields.io/badge/Status-Active%20Development-orange">
+</p>
 
-* Python
-* Ollama
-* SpeechRecognition
-* pyttsx3
-* Spotipy
-* PyAudio
+---
 
-# Example Commands
+# ✨ Features
 
+<<<<<<< HEAD
 * "Diya"
 * "Play Closer"
 * "Lock my laptop"
 * "What is Artificial Intelligence?"
 * "Sleep"
 * "Wake up"
+=======
+* 🎤 Voice Recognition
+* 🔊 Text-to-Speech
+* 🧠 Local AI using Ollama
+* ⚡ Fast AI responses using Qwen2.5 1.5B
+* 🎯 Intelligent command routing
+* 🎵 Spotify control
+* 🌐 Chrome control
+* 🔒 Laptop lock
+* 💤 Wake / Sleep Mode
+* 🧠 Conversation Context
+* 🧩 Modular Skill Architecture
+* 💾 Local Memory
+* 🚀 Performance Optimization
+>>>>>>> a62c7ac45fe3f0c3d214551b190c220dc129cd4f
 
-# Project Structure
+---
 
-core/
-skills/
-speech/
-config/
-memory/
+# 🧠 How Diya Works
 
-main.py
-requirements.txt
 
-# Installation
 
-1. Clone the repository
+Diya uses a modular router to decide whether a command should be handled directly by a skill or sent to the local AI.
 
-git clone <repository-url>
+---
 
-2. Install dependencies
+# ⚡ Direct Commands vs AI Commands
 
-pip install -r requirements.txt
+## Direct Command
 
-3. Install and run Ollama
+For:
 
-ollama run llama3
-
-4. Run the assistant
-
-python main.py
-
-# Future Improvements
-
-* Code compilation and debugging assistant
-* Persistent long-term memory
-* Screenshot and vision capabilities
-* Advanced wake-word detection
-* Smart desktop automation
-* GUI Dashboard
-
-# Author
-
-Divyansh Ranka
-
-B.Tech Information Technology (AI & ML)
-VIT Vellore
+```text
+"Diya -> wake up word"
+"Open Chrome"
+"Play <songname>"
+"Diya, what is polymorphism?"
