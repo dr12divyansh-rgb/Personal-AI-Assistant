@@ -7,7 +7,7 @@ assistant_awake = False
 context = AssistantContext()
 router = AssistantRouter(context)
 
-speak("Jarvis is now online")
+speak("Diya is now online")
 
 
 DIRECT_COMMANDS = [
@@ -39,11 +39,11 @@ while True:
         query = query.lower()
 
 
-        if "jarvis" in query or "wake up" in query:
+        if "diya" in query or "wake up" in query:
 
             assistant_awake = True
 
-            if "jarvis" in query:
+            if "diya" in query:
                 speak("Yes, how can I assist you?")
             
             else:
@@ -79,11 +79,11 @@ while True:
 
     # Ignore wake-word-only queries
     wake_phrases = [
-        "jarvis",
-        "hey jarvis",
-        "hi jarvis",
-        "okay jarvis",
-        "ok jarvis"
+        "diya",
+        "hey diya",
+        "hi diya",
+        "okay diya",
+        "ok diya"
     ]
     if query in wake_phrases:
         speak("Yes, How can I assist you?")

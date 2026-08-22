@@ -1,4 +1,4 @@
-#  Personal AI Assistant
+#  Diya - Personal AI Assistant
 
 A Jarvis-inspired AI voice assistant built using Python, Ollama, and Spotify integration.
 
@@ -25,7 +25,7 @@ A Jarvis-inspired AI voice assistant built using Python, Ollama, and Spotify int
 
 # Example Commands
 
-* "Jarvis"
+* "Diya"
 * "Play Closer"
 * "Lock my laptop"
 * "What is Artificial Intelligence?"
