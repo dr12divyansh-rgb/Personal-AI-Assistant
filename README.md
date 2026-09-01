@@ -1,4 +1,4 @@
-# 🤖 Diya — Personal AI Assistant
+# 🤖 September — Personal AI Assistant
 
 <p align="center">
   A local, voice-controlled personal AI assistant inspired by JARVIS.
@@ -28,15 +28,15 @@
 * 💾 Local Memory
 * 🚀 Performance Optimization
 
-# 🧠 How Diya Works
+# 🧠 How September Works
 
-Diya uses a modular router to decide whether a command should be handled directly by a skill or sent to the local AI.
+September uses a modular router to decide whether a command should be handled directly by a skill or sent to the local AI.
 
 
 # Direct Command
 
 ```text
-* "Diya"
+* "September"
 * "Play Closer"
 * "Lock my laptop"
 * "What is Artificial Intelligence?"
