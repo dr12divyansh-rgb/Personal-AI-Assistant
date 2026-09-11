@@ -1,6 +1,7 @@
 venv/
 __pycache__/
 *.pyc
+config/config.py
 .env
 config/secrets.py
 
@@ -12,3 +13,4 @@ desktop.ini
 *.lnk
 *.exe
 model/
+.cache
