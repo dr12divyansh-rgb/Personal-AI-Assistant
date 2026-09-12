@@ -12,13 +12,15 @@ class SystemSkill(BaseSkill):
 
         self.context = context
 
+    # =====================================================
+    # CAN HANDLE
+    # =====================================================
+
     def can_handle(self, query):
 
         query = query.lower().strip()
 
         keywords = [
-
-            # Applications
             "chrome",
             "browser",
             "notepad",
@@ -27,18 +29,23 @@ class SystemSkill(BaseSkill):
             "cmd",
             "command prompt",
             "spotify",
-
-            # System controls
             "lock",
             "shutdown",
-            "restart"
+            "restart",
+            "sleep",
+            "laptop",
+            "computer",
+            "pc"
         ]
 
-        return any(word in query for word in keywords)
+        return any(
+            word in query
+            for word in keywords
+        )
 
-    # ==============================================
-    # CLOSE WINDOWS APPLICATIONS
-    # ==============================================
+    # =====================================================
+    # CLOSE APPLICATION
+    # =====================================================
 
     def _close_application(
         self,
@@ -49,14 +56,12 @@ class SystemSkill(BaseSkill):
         try:
 
             result = subprocess.run(
-
                 [
                     "taskkill",
                     "/IM",
                     process_name,
                     "/F"
                 ],
-
                 capture_output=True,
                 text=True
             )
@@ -84,18 +89,80 @@ class SystemSkill(BaseSkill):
                 f"I couldn't close {application_name}"
             )
 
+    # =====================================================
+    # HANDLE
+    # =====================================================
+
     def handle(self, query):
 
         query = query.lower().strip()
 
-        # ==========================================
-        # CLOSE / EXIT / QUIT
-        # ==========================================
+        # =================================================
+        # SEPTEMBER'S OWN SLEEP
+        # =================================================
+
+        assistant_sleep_commands = [
+
+            "sleep",
+            "go to sleep",
+            "put yourself to sleep",
+            "september sleep",
+            "september go to sleep"
+
+        ]
+
+        if query in assistant_sleep_commands:
+
+            self.context.set(
+                "sleep_requested",
+                True
+            )
+
+            return
+
+        # =================================================
+        # LAPTOP / COMPUTER SLEEP
+        # =================================================
+
+        has_laptop = (
+            "laptop" in query
+            or "computer" in query
+            or "pc" in query
+        )
+
+        sleep_words = [
+
+            "sleep",
+            "to sleep",
+            "on sleep",
+            "into sleep"
+
+        ]
+
+        has_sleep = any(
+            phrase in query
+            for phrase in sleep_words
+        )
+
+        if has_laptop and has_sleep:
+
+            speak(
+                "Putting your laptop to sleep"
+            )
+
+            os.system(
+                "rundll32.exe "
+                "powrprof.dll,SetSuspendState 0,1,0"
+            )
+
+            return
+
+        # =================================================
+        # CLOSE COMMAND
+        # =================================================
 
         close_command = any(
-
             word in query
-
             for word in [
                 "close",
                 "exit",
@@ -105,7 +172,6 @@ class SystemSkill(BaseSkill):
 
         if close_command:
 
-            # Chrome / Browser
             if (
                 "chrome" in query
                 or "browser" in query
@@ -116,7 +182,6 @@ class SystemSkill(BaseSkill):
                     "Chrome"
                 )
 
-            # Spotify
             elif "spotify" in query:
 
                 self._close_application(
@@ -124,7 +189,6 @@ class SystemSkill(BaseSkill):
                     "Spotify"
                 )
 
-            # Notepad
             elif "notepad" in query:
 
                 self._close_application(
@@ -132,7 +196,6 @@ class SystemSkill(BaseSkill):
                     "Notepad"
                 )
 
-            # Calculator
             elif (
                 "calculator" in query
                 or "calc" in query
@@ -143,7 +206,6 @@ class SystemSkill(BaseSkill):
                     "Calculator"
                 )
 
-            # Command Prompt
             elif (
                 "cmd" in query
                 or "command prompt" in query
@@ -162,13 +224,23 @@ class SystemSkill(BaseSkill):
 
             return
 
-        # ==========================================
+        # =================================================
         # LOCK LAPTOP
-        # ==========================================
+        # =================================================
 
-        if "lock" in query:
+        if (
+            "lock" in query
+            and (
+                "laptop" in query
+                or "computer" in query
+                or "pc" in query
+                or query == "lock"
+            )
+        ):
 
-            speak("Locking your laptop")
+            speak(
+                "Locking your laptop"
+            )
 
             os.system(
                 "rundll32.exe "
@@ -177,13 +249,15 @@ class SystemSkill(BaseSkill):
 
             return
 
-        # ==========================================
+        # =================================================
         # SHUTDOWN
-        # ==========================================
+        # =================================================
 
         if "shutdown" in query:
 
-            speak("Shutting down your laptop")
+            speak(
+                "Shutting down your laptop"
+            )
 
             os.system(
                 "shutdown /s /t 0"
@@ -191,13 +265,15 @@ class SystemSkill(BaseSkill):
 
             return
 
-        # ==========================================
+        # =================================================
         # RESTART
-        # ==========================================
+        # =================================================
 
         if "restart" in query:
 
-            speak("Restarting your laptop")
+            speak(
+                "Restarting your laptop"
+            )
 
             os.system(
                 "shutdown /r /t 0"
@@ -205,13 +281,15 @@ class SystemSkill(BaseSkill):
 
             return
 
-        # ==========================================
-        # OPEN NOTEPAD
-        # ==========================================
+        # =================================================
+        # NOTEPAD
+        # =================================================
 
         if "notepad" in query:
 
-            speak("Opening Notepad")
+            speak(
+                "Opening Notepad"
+            )
 
             subprocess.Popen(
                 ["notepad.exe"]
@@ -219,16 +297,18 @@ class SystemSkill(BaseSkill):
 
             return
 
-        # ==========================================
-        # OPEN CALCULATOR
-        # ==========================================
+        # =================================================
+        # CALCULATOR
+        # =================================================
 
         if (
             "calculator" in query
             or "calc" in query
         ):
 
-            speak("Opening Calculator")
+            speak(
+                "Opening Calculator"
+            )
 
             subprocess.Popen(
                 ["calc.exe"]
@@ -236,16 +316,18 @@ class SystemSkill(BaseSkill):
 
             return
 
-        # ==========================================
-        # OPEN COMMAND PROMPT
-        # ==========================================
+        # =================================================
+        # COMMAND PROMPT
+        # =================================================
 
         if (
             "cmd" in query
             or "command prompt" in query
         ):
 
-            speak("Opening Command Prompt")
+            speak(
+                "Opening Command Prompt"
+            )
 
             subprocess.Popen(
                 ["cmd.exe"]
@@ -253,17 +335,21 @@ class SystemSkill(BaseSkill):
 
             return
 
-        # ==========================================
-        # OPEN SPOTIFY
-        # ==========================================
+        # =================================================
+        # SPOTIFY
+        # =================================================
 
         if "spotify" in query:
 
-            speak("Opening Spotify")
+            speak(
+                "Opening Spotify"
+            )
 
             try:
 
-                os.startfile("spotify:")
+                os.startfile(
+                    "spotify:"
+                )
 
             except Exception:
 
@@ -273,8 +359,10 @@ class SystemSkill(BaseSkill):
 
             return
 
-        # ==========================================
-        # UNKNOWN APPLICATION
-        # ==========================================
+        # =================================================
+        # UNKNOWN
+        # =================================================
 
-        speak("Application not recognized")
+        speak(
+            "Application not recognized"
+        )

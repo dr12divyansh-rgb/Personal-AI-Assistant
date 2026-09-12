@@ -12,6 +12,12 @@ class AssistantContext:
 
         self.mode = None
 
+        # Store reminders
+        self.reminders = []
+
+        # Used when a command asks September to sleep
+        self.sleep_requested = False
+
     def set(self, key, value):
 
         setattr(self, key, value)

@@ -3,6 +3,7 @@ from skills.browser_skill import BrowserSkill
 from skills.ai_chat_skill import AIChatSkill
 from skills.system_skill import SystemSkill
 from skills.coding_skill import CodingSkill
+from skills.reminder_skill import ReminderSkill
 
 
 class AssistantRouter:
@@ -12,6 +13,8 @@ class AssistantRouter:
         self.context = context
 
         self.skills = [
+
+            ReminderSkill(self.context),
 
             MusicSkill(self.context),
             BrowserSkill(self.context),
@@ -121,10 +124,12 @@ class AssistantRouter:
                         "exit",
                         "quit",
                         "lock",
+                        "sleep",
                         "restart",
                         "shutdown",
                         "start",
-                        "launch"
+                        "launch",
+                        "remind"
                     ]
 
                     # -------------------------------------

@@ -20,15 +20,15 @@ recognizer = sr.Recognizer()
 # considers that you have finished speaking.
 #
 # Increase this if September stops too early.
-recognizer.pause_threshold = 5.0
+recognizer.pause_threshold = 3.0
 
 # Minimum amount of speech required before recognition
 # considers it a real phrase.
-recognizer.phrase_threshold = 0.3
+recognizer.phrase_threshold = 0.2
 
 # Amount of silence used when determining the beginning
 # of a phrase.
-recognizer.non_speaking_duration = 0.5
+recognizer.non_speaking_duration = 0.3
 
 
 # =========================================================
