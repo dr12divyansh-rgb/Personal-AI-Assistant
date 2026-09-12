@@ -4,6 +4,7 @@ from skills.ai_chat_skill import AIChatSkill
 from skills.system_skill import SystemSkill
 from skills.coding_skill import CodingSkill
 from skills.reminder_skill import ReminderSkill
+from skills.time_skill import TimeSkill
 
 
 class AssistantRouter:
@@ -15,6 +16,7 @@ class AssistantRouter:
         self.skills = [
 
             ReminderSkill(self.context),
+            TimeSkill(self.context),
 
             MusicSkill(self.context),
             BrowserSkill(self.context),

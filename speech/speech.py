@@ -1,4 +1,5 @@
 import time
+import threading
 import speech_recognition as sr
 import pyttsx3
 import json
@@ -8,7 +9,6 @@ import json
 # SPEECH RECOGNIZER
 # =========================================================
 
-# Create recognizer once
 recognizer = sr.Recognizer()
 
 
@@ -16,18 +16,14 @@ recognizer = sr.Recognizer()
 # SPEECH DETECTION SETTINGS
 # =========================================================
 
-# How long silence must continue before September
-# considers that you have finished speaking.
-#
-# Increase this if September stops too early.
+# Allows natural pauses while speaking.
+# 3 seconds gives enough time to complete a full sentence.
 recognizer.pause_threshold = 3.0
 
-# Minimum amount of speech required before recognition
-# considers it a real phrase.
+# Detect speech reasonably quickly.
 recognizer.phrase_threshold = 0.2
 
-# Amount of silence used when determining the beginning
-# of a phrase.
+# Silence required before speech is considered started.
 recognizer.non_speaking_duration = 0.3
 
 
@@ -35,40 +31,58 @@ recognizer.non_speaking_duration = 0.3
 # TEXT TO SPEECH
 # =========================================================
 
+# Prevent two background tasks from speaking at the
+# exact same time.
+tts_lock = threading.Lock()
+
+
 def speak(text):
 
     try:
 
         text = str(text)
 
-        print("Assistant:", text)
-
-        # Create engine for each speech call
-        engine = pyttsx3.init()
-
-        voices = engine.getProperty("voices")
-
-        if len(voices) > 1:
-
-            engine.setProperty(
-                "voice",
-                voices[1].id
-            )
-
-        engine.setProperty(
-            "rate",
-            170
+        print(
+            "Assistant:",
+            text
         )
 
-        engine.say(text)
+        # Create a fresh engine just like the original
+        # working version.
+        with tts_lock:
 
-        engine.runAndWait()
+            engine = pyttsx3.init()
 
-        engine.stop()
+            voices = engine.getProperty(
+                "voices"
+            )
+
+            if len(voices) > 1:
+
+                engine.setProperty(
+                    "voice",
+                    voices[1].id
+                )
+
+            engine.setProperty(
+                "rate",
+                170
+            )
+
+            engine.say(
+                text
+            )
+
+            engine.runAndWait()
+
+            engine.stop()
 
     except Exception as e:
 
-        print("TTS error:", e)
+        print(
+            "TTS error:",
+            e
+        )
 
 
 # =========================================================
@@ -79,42 +93,32 @@ def take_command(silent=False):
 
     with sr.Microphone() as source:
 
-        print("\nListening...")
+        print(
+            "\nListening..."
+        )
 
-        # -------------------------------------------------
-        # AMBIENT NOISE CALIBRATION
-        # -------------------------------------------------
-
+        # Short microphone calibration.
         recognizer.adjust_for_ambient_noise(
             source,
-            duration=0.5
+            duration=0.3
         )
 
         try:
 
             # -------------------------------------------------
-            # START LISTENING
+            # LISTEN
             # -------------------------------------------------
 
             listen_start = time.time()
 
             audio = recognizer.listen(
-
                 source,
-
-                # Maximum time September waits for you
-                # to START speaking.
                 timeout=5
-
-                # IMPORTANT:
-                # No phrase_time_limit.
-                #
-                # This means there is NO 12-second
-                # hard limit on your speech.
             )
 
             listening_time = (
-                time.time() - listen_start
+                time.time()
+                - listen_start
             )
 
             print(
@@ -123,32 +127,29 @@ def take_command(silent=False):
             )
 
             # -------------------------------------------------
-            # SPEECH RECOGNITION
+            # RECOGNIZE
             # -------------------------------------------------
 
-            print("Recognizing...")
+            print(
+                "Recognizing..."
+            )
 
             recognize_start = time.time()
 
             query = recognizer.recognize_google(
-
                 audio,
-
                 language="en-in"
             )
 
             recognition_time = (
-                time.time() - recognize_start
+                time.time()
+                - recognize_start
             )
 
             print(
                 f"Recognition time: "
                 f"{recognition_time:.2f} seconds"
             )
-
-            # -------------------------------------------------
-            # COMPLETE COMMAND
-            # -------------------------------------------------
 
             print(
                 "You said:",
@@ -157,17 +158,17 @@ def take_command(silent=False):
 
             return query.lower()
 
-        # -------------------------------------------------
-        # USER DID NOT START SPEAKING
-        # -------------------------------------------------
+        # -----------------------------------------------------
+        # NO SPEECH
+        # -----------------------------------------------------
 
         except sr.WaitTimeoutError:
 
             return ""
 
-        # -------------------------------------------------
-        # SPEECH WAS NOT UNDERSTOOD
-        # -------------------------------------------------
+        # -----------------------------------------------------
+        # SPEECH NOT UNDERSTOOD
+        # -----------------------------------------------------
 
         except sr.UnknownValueError:
 
@@ -179,9 +180,9 @@ def take_command(silent=False):
 
             return ""
 
-        # -------------------------------------------------
-        # INTERNET / GOOGLE SPEECH ERROR
-        # -------------------------------------------------
+        # -----------------------------------------------------
+        # NETWORK ERROR
+        # -----------------------------------------------------
 
         except sr.RequestError:
 
@@ -193,9 +194,9 @@ def take_command(silent=False):
 
             return ""
 
-        # -------------------------------------------------
+        # -----------------------------------------------------
         # JSON ERROR
-        # -------------------------------------------------
+        # -----------------------------------------------------
 
         except json.JSONDecodeError:
 
@@ -208,9 +209,9 @@ def take_command(silent=False):
 
             return ""
 
-        # -------------------------------------------------
-        # OTHER ERRORS
-        # -------------------------------------------------
+        # -----------------------------------------------------
+        # OTHER ERROR
+        # -----------------------------------------------------
 
         except Exception as e:
 
