@@ -1,4 +1,4 @@
-# 🤖 September — Personal AI Assistant
+#  September — Personal AI Assistant
 
 <p align="center">
   A local, voice-controlled personal AI assistant inspired by JARVIS.
@@ -12,23 +12,23 @@
   <img src="https://img.shields.io/badge/Status-Active%20Development-orange">
 </p>
 
-# ✨ Features
+#  Features
 
-* 🎤 Voice Recognition
-* 🔊 Text-to-Speech
-* 🧠 Local AI using Ollama
-* ⚡ Fast AI responses using Qwen2.5 1.5B
-* 🎯 Intelligent command routing
-* 🎵 Spotify control
-* 🌐 Chrome control
-* 🔒 Laptop lock
-* 💤 Wake / Sleep Mode
-* 🧠 Conversation Context
-* 🧩 Modular Skill Architecture
-* 💾 Local Memory
-* 🚀 Performance Optimization
+*  Voice Recognition
+*  Text-to-Speech
+*  Local AI using Ollama
+*  Fast AI responses using Qwen2.5 1.5B
+*  Intelligent command routing
+*  Spotify control
+*  Chrome control
+*  Laptop lock
+*  Wake / Sleep Mode
+*  Conversation Context
+*  Modular Skill Architecture
+*  Local Memory
+*  Performance Optimization
 
-# 🧠 How September Works
+#  How September Works
 
 September uses a modular router to decide whether a command should be handled directly by a skill or sent to the local AI.
 
@@ -42,3 +42,6 @@ September uses a modular router to decide whether a command should be handled di
 * "What is Artificial Intelligence?"
 * "Sleep"
 * "Wake up"
+
+# How to Run
+Run 'python main.py' in the folder terminal

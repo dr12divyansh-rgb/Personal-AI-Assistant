@@ -17,7 +17,7 @@ recognizer = sr.Recognizer()
 # =========================================================
 
 # Allows natural pauses while speaking.
-# 3 seconds gives enough time to complete a full sentence.
+# 5 seconds gives enough time to complete a full sentence.
 recognizer.pause_threshold = 3.0
 
 # Detect speech reasonably quickly.
